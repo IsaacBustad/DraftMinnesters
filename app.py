@@ -17,6 +17,97 @@ if not os.path.exists(log_dir):
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s', handlers=[logging.FileHandler(os.path.join(log_dir, 'app.log')), logging.StreamHandler()])
 
+def init_db():
+    db_config = {
+        'host': 'localhost',
+        'user': 'appuser',
+        'password': 'password',
+    }
+    db_name = 'draft_ministers_db'
+    
+    try:
+        conn = mysql.connector.connect(**db_config, database=db_name)
+        logging.info("Database connected successfully.")
+        # Create tables if they don't exist
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS soccer_teams (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) UNIQUE,
+                code VARCHAR(10),
+                country VARCHAR(255),
+                founded INT,
+                national BOOLEAN,
+                logo VARCHAR(255),
+                venue_id INT,
+                venue_name VARCHAR(255),
+                venue_address VARCHAR(255),
+                venue_city VARCHAR(255),
+                venue_capacity INT,
+                venue_surface VARCHAR(50),
+                venue_image VARCHAR(255),
+                league VARCHAR(255)
+            )
+        """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS soccer_players (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255),
+                position VARCHAR(255),
+                team_id INT,
+                age INT,
+                FOREIGN KEY (team_id) REFERENCES soccer_teams(id)
+            )
+        """)
+        conn.commit()
+        cursor.close()
+        conn.close()
+    except mysql.connector.Error as err:
+        if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+            logging.info("Database does not exist. Creating...")
+            conn = mysql.connector.connect(**db_config)  # Connect without database
+            cursor = conn.cursor()
+            cursor.execute(f"CREATE DATABASE {db_name}")
+            conn.commit()
+            conn.database = db_name  # Switch to the new database
+            # Create tables
+            cursor.execute("""
+                CREATE TABLE soccer_teams (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(255) UNIQUE,
+                    code VARCHAR(10),
+                    country VARCHAR(255),
+                    founded INT,
+                    national BOOLEAN,
+                    logo VARCHAR(255),
+                    venue_id INT,
+                    venue_name VARCHAR(255),
+                    venue_address VARCHAR(255),
+                    venue_city VARCHAR(255),
+                    venue_capacity INT,
+                    venue_surface VARCHAR(50),
+                    venue_image VARCHAR(255),
+                    league VARCHAR(255)
+                )
+            """)
+            cursor.execute("""
+                CREATE TABLE soccer_players (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(255),
+                    position VARCHAR(255),
+                    team_id INT,
+                    age INT,
+                    FOREIGN KEY (team_id) REFERENCES soccer_teams(id)
+                )
+            """)
+            conn.commit()
+            cursor.close()
+            conn.close()
+            logging.info("Database and tables created successfully.")
+        else:
+            logging.error(f"Database connection error: {err}")
+            raise err
+
 @app.route('/')
 def home():
     logging.info("Accessing home endpoint")
@@ -68,25 +159,6 @@ def fetch_teams():
     try:
         conn = mysql.connector.connect(host='localhost', user='appuser', password='password', database='draft_ministers_db')
         cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS soccer_teams (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) UNIQUE,
-                code VARCHAR(10),
-                country VARCHAR(255),
-                founded INT,
-                national BOOLEAN,
-                logo VARCHAR(255),
-                venue_id INT,
-                venue_name VARCHAR(255),
-                venue_address VARCHAR(255),
-                venue_city VARCHAR(255),
-                venue_capacity INT,
-                venue_surface VARCHAR(50),
-                venue_image VARCHAR(255),
-                league VARCHAR(255)
-            )
-        """)
 
         for item in teams:
             team = item.get('team', {})
@@ -147,25 +219,6 @@ def insert_team():
     try:
         conn = mysql.connector.connect(host='localhost', user='appuser', password='password', database='draft_ministers_db')
         cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS soccer_teams (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) UNIQUE,
-                code VARCHAR(10),
-                country VARCHAR(255),
-                founded INT,
-                national BOOLEAN,
-                logo VARCHAR(255),
-                venue_id INT,
-                venue_name VARCHAR(255),
-                venue_address VARCHAR(255),
-                venue_city VARCHAR(255),
-                venue_capacity INT,
-                venue_surface VARCHAR(50),
-                venue_image VARCHAR(255),
-                league VARCHAR(255)
-            )
-        """)
         cursor.execute("INSERT INTO soccer_teams (name, country, league) VALUES (%s, %s, %s)", 
                        (data['name'], data['country'], data['league']))
         conn.commit()
@@ -212,16 +265,6 @@ def insert_player():
     try:
         conn = mysql.connector.connect(host='localhost', user='appuser', password='password', database='draft_ministers_db')
         cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS soccer_players (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255),
-                position VARCHAR(255),
-                team_id INT,
-                age INT,
-                FOREIGN KEY (team_id) REFERENCES soccer_teams(id)
-            )
-        """)
         cursor.execute("INSERT INTO soccer_players (name, position, team_id, age) VALUES (%s, %s, %s, %s)", 
                        (data['name'], data['position'], data['team_id'], data['age']))
         conn.commit()
@@ -304,4 +347,5 @@ def team_details(team_id):
         return jsonify({"error": "Database error"}), 500
 
 if __name__ == '__main__':
+    init_db()
     app.run(host='0.0.0.0', port=5000)
