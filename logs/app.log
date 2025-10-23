@@ -16,3 +16,43 @@
 2025-10-22 20:24:37,691 INFO 127.0.0.1 - - [22/Oct/2025 20:24:37] "GET / HTTP/1.1" 200 -
 2025-10-22 20:24:42,568 INFO Fetching all teams from DB
 2025-10-22 20:24:42,570 INFO 127.0.0.1 - - [22/Oct/2025 20:24:42] "GET /teams HTTP/1.1" 200 -
+2025-10-22 20:25:09,727 INFO Fetching all teams from DB
+2025-10-22 20:25:09,727 INFO 127.0.0.1 - - [22/Oct/2025 20:25:09] "GET /teams HTTP/1.1" 200 -
+2025-10-22 20:25:24,289 INFO Starting fetch_teams endpoint
+2025-10-22 20:25:24,294 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-10-22 20:25:24,879 DEBUG https://v3.football.api-sports.io:443 "GET /teams?league=39&season=2023 HTTP/1.1" 200 None
+2025-10-22 20:25:24,884 DEBUG API response status: 200
+2025-10-22 20:25:25,000 DEBUG <KafkaProducer client_id=kafka-python-producer-1 transactional_id=None>: Starting Kafka producer
+2025-10-22 20:25:25,002 DEBUG Added sensor with name connections-closed
+2025-10-22 20:25:25,002 DEBUG Added sensor with name connections-created
+2025-10-22 20:25:25,003 DEBUG Added sensor with name select-time
+2025-10-22 20:25:25,003 DEBUG Added sensor with name io-time
+2025-10-22 20:25:25,003 DEBUG Attempting to check version with node bootstrap-0
+2025-10-22 20:25:25,003 DEBUG Initiating connection to node bootstrap-0 at localhost:9092
+2025-10-22 20:25:25,003 DEBUG Added sensor with name bytes-sent-received
+2025-10-22 20:25:25,004 DEBUG Added sensor with name bytes-sent
+2025-10-22 20:25:25,004 DEBUG Added sensor with name bytes-received
+2025-10-22 20:25:25,004 DEBUG Added sensor with name request-latency
+2025-10-22 20:25:25,004 DEBUG Added sensor with name throttle-time
+2025-10-22 20:25:25,004 DEBUG Added sensor with name node-bootstrap-0.bytes-sent
+2025-10-22 20:25:25,005 DEBUG Added sensor with name node-bootstrap-0.bytes-received
+2025-10-22 20:25:25,005 DEBUG Added sensor with name node-bootstrap-0.latency
+2025-10-22 20:25:25,005 DEBUG Added sensor with name node-bootstrap-0.throttle
+2025-10-22 20:25:25,005 DEBUG <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [unspecified None]>: creating new socket
+2025-10-22 20:25:25,005 DEBUG <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: setting socket option (6, 1, 1)
+2025-10-22 20:25:25,005 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2025-10-22 20:25:25,006 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:25,221 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:25,425 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:25,631 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:25,833 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:26,037 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:26,240 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:26,443 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:26,647 DEBUG Timeouts: user 200.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:26,851 DEBUG Timeouts: user 151.000000, metadata inf, idle connection inf, request inf
+2025-10-22 20:25:27,007 DEBUG Failed to identify api_version after connection attempt to <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>
+2025-10-22 20:25:27,007 ERROR Error sending to Kafka: NoBrokersAvailable
+2025-10-22 20:25:27,011 INFO 127.0.0.1 - - [22/Oct/2025 20:25:27] "[35m[1mGET /fetch_teams HTTP/1.1[0m" 500 -
+2025-10-22 20:25:33,119 INFO Fetching all teams from DB
+2025-10-22 20:25:33,121 INFO 127.0.0.1 - - [22/Oct/2025 20:25:33] "GET /teams HTTP/1.1" 200 -
