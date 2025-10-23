@@ -6,8 +6,10 @@ import json
 import requests
 import logging
 import os
+from routes.predict import predict_bp
 
 app = Flask(__name__)
+app.register_blueprint(predict_bp)
 
 # Create logs directory if it doesn't exist
 log_dir = 'logs'
