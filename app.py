@@ -1,13 +1,11 @@
 from flask import Flask, jsonify, request, render_template_string
 import sqlite3
-from kafka import KafkaProducer
 import subprocess
 import json
-import requests
 import logging
 import os
 from routes.predict import predict_bp
-import secret_tunnel as secret
+import secret_tunnel as secret 
 
 app = Flask(__name__)
 app.register_blueprint(predict_bp)
@@ -76,14 +74,17 @@ def home():
     </head>
     <body>
         <header>
-            <h1>Welcome to Draft Ministers App - Soccer Prediction!</h1>
-            <p>Follow us on <a href="#" style="color: #1DA1F2;">Twitter</a> and <a href="#" style="color: #1DA1F2;">Facebook</a></p>
+            <div class="logo" aria-label="Draft Ministers Logo">
+                <img src="{{ url_for('static', filename='DM_Logo_W.png') }}" alt="Draft Ministers Logo">
+                <h1>Draft Ministers</h1>
+            </div>
         </header>
         <main>
-            <img src="{{ url_for('static', filename='images/soccer_banner.jpg') }}" alt="Most Likely to Win" style="width:auto; height:auto; ">
-            <div class="banner-container">Underdogs</div>
-            <div class="banner-container">Upcoming Matches</div>
-            <div class="banner-container">Most Likely to Win</div>
+            <div id="banner">
+                <div class="banner-container">Underdogs</div>
+                <div class="banner-container">Upcoming Matches</div>
+                <div class="banner-container">Most Likely to Win</div>
+            </div>
             <nav class="navigation">
                 <button role="tab" class="nav-links active" onclick="toggleNav(event, 'upcoming-matches-container')" aria-selected="true">Upcoming Matches</button>
                 <button role="tab" class="nav-links" onclick="toggleNav(event, 'most-likely-to-win-container')">Most Likely to Win</button>
@@ -117,4 +118,4 @@ def home():
 
 if __name__ == '__main__':
     init_db()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
