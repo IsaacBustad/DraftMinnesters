@@ -191,21 +191,82 @@
                 `;
             }
 
+            // Store all matches data for pagination
+            const matchesData = {
+                'upcoming-matches-grid': { all: [], displayed: 0, badgeClass: '', badgeText: 'Upcoming' },
+                'most-likely-to-win-grid': { all: [], displayed: 0, badgeClass: 'win', badgeText: 'Likely win' },
+                'most-likely-to-lose-grid': { all: [], displayed: 0, badgeClass: 'lose', badgeText: 'Likely lose' }
+            };
+
+            const CARDS_PER_ROW = 3;
+            const INITIAL_ROWS = 3;
+            const INITIAL_CARDS = INITIAL_ROWS * CARDS_PER_ROW;
+            const CARDS_PER_LOAD = INITIAL_CARDS;
+
             function renderMatches(containerId, matches, badgeClass = '', badgeText = 'Upcoming') {
                 const container = document.getElementById(containerId);
                 if (!container) return;
 
                 if (!matches || matches.length === 0) {
                     container.innerHTML = '<div class="empty-note">No matches available.</div>';
+                    matchesData[containerId] = { all: [], displayed: 0, badgeClass, badgeText };
                     return;
                 }
 
-                container.innerHTML = matches.map(match => 
-                    createMatchCard(match, badgeClass, badgeText)
+                // Store all matches
+                matchesData[containerId] = {
+                    all: matches,
+                    displayed: Math.min(INITIAL_CARDS, matches.length),
+                    badgeClass,
+                    badgeText
+                };
+
+                // Render initial cards
+                renderMatchesPage(containerId);
+            }
+
+            function renderMatchesPage(containerId) {
+                const data = matchesData[containerId];
+                if (!data || !data.all.length) return;
+
+                const container = document.getElementById(containerId);
+                const cardsToShow = data.all.slice(0, data.displayed);
+                
+                container.innerHTML = cardsToShow.map(match => 
+                    createMatchCard(match, data.badgeClass, data.badgeText)
                 ).join('');
+
+                // Add or update Load More button
+                const parentContainer = container.closest('.nav-content');
+                if (parentContainer) {
+                    let loadMoreBtn = parentContainer.querySelector('.load-more-btn');
+                    
+                    if (data.displayed < data.all.length) {
+                        if (!loadMoreBtn) {
+                            loadMoreBtn = document.createElement('button');
+                            loadMoreBtn.className = 'load-more-btn';
+                            loadMoreBtn.textContent = 'Load More';
+                            loadMoreBtn.onclick = () => loadMoreMatches(containerId);
+                            parentContainer.appendChild(loadMoreBtn);
+                        }
+                        loadMoreBtn.style.display = 'block';
+                    } else {
+                        if (loadMoreBtn) {
+                            loadMoreBtn.style.display = 'none';
+                        }
+                    }
+                }
 
                 // Re-initialize star system after rendering
                 initializeStarSystem();
+            }
+
+            function loadMoreMatches(containerId) {
+                const data = matchesData[containerId];
+                if (!data) return;
+
+                data.displayed = Math.min(data.displayed + CARDS_PER_LOAD, data.all.length);
+                renderMatchesPage(containerId);
             }
 
             // ---- Star system for cards ----
