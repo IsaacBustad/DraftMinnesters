@@ -5,10 +5,12 @@ import json
 import logging
 import os
 from routes.predict import predict_bp
+from routes.matches import matches_bp
 import secret_tunnel as secret 
 
 app = Flask(__name__)
 app.register_blueprint(predict_bp)
+app.register_blueprint(matches_bp)
 
 # Create logs directory if it doesn't exist
 log_dir = 'logs'

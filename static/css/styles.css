@@ -278,10 +278,20 @@ nav.navigation {
 .card-body{padding:12px}
 .row{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
 .team{display:flex;align-items:center;gap:10px}
+.team-logo{
+  width:26px;height:26px;object-fit:contain;
+  border-radius:4px;
+}
 .crest{
   width:26px;height:26px;border-radius:8px;
   background:#f4f4f4;border:1px solid #dedede;
   display:grid;place-items:center;font-weight:800
+}
+.loading{
+  grid-column:span 12;
+  text-align:center;
+  padding:2rem;
+  color:#666;
 }
 .row.note{color:#666}
 .meta{

@@ -8230,3 +8230,195 @@
 2025-11-12 18:15:59,284 INFO 127.0.0.1 - - [12/Nov/2025 18:15:59] "[36mGET /static/images/slide8.jpg HTTP/1.1[0m" 304 -
 2025-11-12 18:16:00,138 INFO 127.0.0.1 - - [12/Nov/2025 18:16:00] "[36mGET /static/favicon_io/site.webmanifest HTTP/1.1[0m" 304 -
 2025-11-12 18:16:00,140 INFO 127.0.0.1 - - [12/Nov/2025 18:16:00] "[36mGET /static/favicon_io/favicon-32x32.png HTTP/1.1[0m" 304 -
+2025-11-15 11:21:45,954 INFO Database connected successfully.
+2025-11-15 11:21:47,424 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.153.128:5000
+2025-11-15 11:21:47,426 INFO [33mPress CTRL+C to quit[0m
+2025-11-15 11:21:47,440 INFO  * Restarting with stat
+2025-11-15 11:21:48,296 INFO Database connected successfully.
+2025-11-15 11:21:48,311 WARNING  * Debugger is active!
+2025-11-15 11:21:48,320 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:21:53,689 INFO Accessing home endpoint
+2025-11-15 11:21:53,721 INFO 127.0.0.1 - - [15/Nov/2025 11:21:53] "GET / HTTP/1.1" 200 -
+2025-11-15 11:21:54,173 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/DM_Logo_W.png HTTP/1.1" 200 -
+2025-11-15 11:21:54,192 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-11-15 11:21:54,229 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide1.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,659 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide2.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,663 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide3.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,665 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide4.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,666 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/js/nav.js HTTP/1.1" 200 -
+2025-11-15 11:21:54,669 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide6.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,669 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide5.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,681 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide7.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,708 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/slide8.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,744 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/ClearField.png HTTP/1.1" 200 -
+2025-11-15 11:21:54,748 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/underdogs.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,749 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/images/money.jpg HTTP/1.1" 200 -
+2025-11-15 11:21:54,816 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/fonts/LibreBaskerville-Bold.ttf HTTP/1.1" 200 -
+2025-11-15 11:21:54,819 INFO 127.0.0.1 - - [15/Nov/2025 11:21:54] "GET /static/fonts/LibreBaskerville-Regular.ttf HTTP/1.1" 200 -
+2025-11-15 11:21:55,074 INFO 127.0.0.1 - - [15/Nov/2025 11:21:55] "GET /static/favicon_io/site.webmanifest HTTP/1.1" 200 -
+2025-11-15 11:21:55,097 INFO 127.0.0.1 - - [15/Nov/2025 11:21:55] "GET /static/favicon_io/favicon-32x32.png HTTP/1.1" 200 -
+2025-11-15 11:37:30,503 INFO  * Detected change in 'c:\\Users\\user\\Desktop\\CIS 641\\flaskapp\\DraftMinnesters\\routes\\matches.py', reloading
+2025-11-15 11:37:30,983 INFO  * Restarting with stat
+2025-11-15 11:37:34,932 INFO Database connected successfully.
+2025-11-15 11:37:34,959 WARNING  * Debugger is active!
+2025-11-15 11:37:34,972 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:38:25,714 INFO  * Detected change in 'c:\\Users\\user\\Desktop\\CIS 641\\flaskapp\\DraftMinnesters\\routes\\matches.py', reloading
+2025-11-15 11:38:25,872 INFO  * Restarting with stat
+2025-11-15 11:38:27,312 INFO Database connected successfully.
+2025-11-15 11:38:27,345 WARNING  * Debugger is active!
+2025-11-15 11:38:27,357 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:38:38,209 INFO  * Detected change in 'c:\\Users\\user\\Desktop\\CIS 641\\flaskapp\\DraftMinnesters\\routes\\matches.py', reloading
+2025-11-15 11:38:38,484 INFO  * Restarting with stat
+2025-11-15 11:38:41,844 INFO Database connected successfully.
+2025-11-15 11:38:41,873 WARNING  * Debugger is active!
+2025-11-15 11:38:41,885 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:38:46,182 INFO  * Detected change in 'c:\\Users\\user\\Desktop\\CIS 641\\flaskapp\\DraftMinnesters\\routes\\matches.py', reloading
+2025-11-15 11:38:46,324 INFO  * Restarting with stat
+2025-11-15 11:38:48,024 INFO Database connected successfully.
+2025-11-15 11:38:48,050 WARNING  * Debugger is active!
+2025-11-15 11:38:48,059 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:38:57,623 INFO  * Detected change in 'c:\\Users\\user\\Desktop\\CIS 641\\flaskapp\\DraftMinnesters\\routes\\matches.py', reloading
+2025-11-15 11:38:57,855 INFO  * Restarting with stat
+2025-11-15 11:38:59,370 INFO Database connected successfully.
+2025-11-15 11:38:59,389 WARNING  * Debugger is active!
+2025-11-15 11:38:59,397 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:39:11,085 INFO  * Detected change in 'c:\\Users\\user\\Desktop\\CIS 641\\flaskapp\\DraftMinnesters\\app.py', reloading
+2025-11-15 11:39:11,235 INFO  * Restarting with stat
+2025-11-15 11:39:12,298 INFO Database connected successfully.
+2025-11-15 11:39:12,322 WARNING  * Debugger is active!
+2025-11-15 11:39:12,331 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:39:29,099 INFO Accessing home endpoint
+2025-11-15 11:39:29,110 INFO 127.0.0.1 - - [15/Nov/2025 11:39:29] "GET / HTTP/1.1" 200 -
+2025-11-15 11:39:29,880 INFO 127.0.0.1 - - [15/Nov/2025 11:39:29] "[36mGET /static/images/slide1.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:29,934 INFO 127.0.0.1 - - [15/Nov/2025 11:39:29] "[36mGET /static/images/DM_Logo_W.png HTTP/1.1[0m" 304 -
+2025-11-15 11:39:29,948 INFO 127.0.0.1 - - [15/Nov/2025 11:39:29] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-11-15 11:39:30,574 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide3.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,576 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide4.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,582 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide5.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,578 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/js/nav.js HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,578 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide2.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,610 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide6.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,623 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/ClearField.png HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,629 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/underdogs.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,648 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/fonts/LibreBaskerville-Bold.ttf HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,668 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/money.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,705 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide7.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:30,709 INFO 127.0.0.1 - - [15/Nov/2025 11:39:30] "[36mGET /static/images/slide8.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:31,687 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:39:31,757 INFO 127.0.0.1 - - [15/Nov/2025 11:39:31] "[36mGET /static/favicon_io/site.webmanifest HTTP/1.1[0m" 304 -
+2025-11-15 11:39:31,758 INFO 127.0.0.1 - - [15/Nov/2025 11:39:31] "[36mGET /static/favicon_io/favicon-32x32.png HTTP/1.1[0m" 304 -
+2025-11-15 11:39:32,992 DEBUG https://v3.football.api-sports.io:443 "GET /teams?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:39:32,998 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:39:34,077 DEBUG https://v3.football.api-sports.io:443 "GET /fixtures?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:39:34,101 INFO 127.0.0.1 - - [15/Nov/2025 11:39:34] "GET /api/matches HTTP/1.1" 200 -
+2025-11-15 11:39:46,747 INFO 127.0.0.1 - - [15/Nov/2025 11:39:46] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-15 11:39:46,748 INFO 127.0.0.1 - - [15/Nov/2025 11:39:46] "[36mGET /static/favicon_io/site.webmanifest HTTP/1.1[0m" 304 -
+2025-11-15 11:39:46,778 INFO 127.0.0.1 - - [15/Nov/2025 11:39:46] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-15 11:39:49,399 INFO Accessing home endpoint
+2025-11-15 11:39:49,402 INFO 127.0.0.1 - - [15/Nov/2025 11:39:49] "GET / HTTP/1.1" 200 -
+2025-11-15 11:39:49,493 INFO 127.0.0.1 - - [15/Nov/2025 11:39:49] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-15 11:39:49,510 INFO 127.0.0.1 - - [15/Nov/2025 11:39:49] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-15 11:39:49,524 INFO 127.0.0.1 - - [15/Nov/2025 11:39:49] "[36mGET /static/images/DM_Logo_W.png HTTP/1.1[0m" 304 -
+2025-11-15 11:39:49,525 INFO 127.0.0.1 - - [15/Nov/2025 11:39:49] "[36mGET /static/images/slide1.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,196 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide2.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,203 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide3.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,244 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/js/nav.js HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,247 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide5.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,248 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide4.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,311 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide6.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,330 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide7.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,331 INFO 127.0.0.1 - - [15/Nov/2025 11:39:50] "[36mGET /static/images/slide8.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:39:50,867 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:39:51,534 INFO 127.0.0.1 - - [15/Nov/2025 11:39:51] "[36mGET /static/favicon_io/site.webmanifest HTTP/1.1[0m" 304 -
+2025-11-15 11:39:51,536 INFO 127.0.0.1 - - [15/Nov/2025 11:39:51] "[36mGET /static/favicon_io/favicon-32x32.png HTTP/1.1[0m" 304 -
+2025-11-15 11:39:52,085 DEBUG https://v3.football.api-sports.io:443 "GET /teams?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:39:52,092 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:39:52,753 DEBUG https://v3.football.api-sports.io:443 "GET /fixtures?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:39:52,891 INFO 127.0.0.1 - - [15/Nov/2025 11:39:52] "GET /api/matches HTTP/1.1" 200 -
+2025-11-15 11:42:00,503 INFO Database connected successfully.
+2025-11-15 11:42:01,853 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.153.128:5000
+2025-11-15 11:42:01,854 INFO [33mPress CTRL+C to quit[0m
+2025-11-15 11:42:01,856 INFO  * Restarting with stat
+2025-11-15 11:42:05,199 INFO Database connected successfully.
+2025-11-15 11:42:05,250 WARNING  * Debugger is active!
+2025-11-15 11:42:05,264 INFO  * Debugger PIN: 631-575-870
+2025-11-15 11:42:18,344 INFO Database connected successfully.
+2025-11-15 11:42:19,691 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.153.128:5000
+2025-11-15 11:42:19,693 INFO [33mPress CTRL+C to quit[0m
+2025-11-15 11:42:19,705 INFO  * Restarting with stat
+2025-11-15 11:42:25,872 INFO Database connected successfully.
+2025-11-15 11:42:25,909 WARNING  * Debugger is active!
+2025-11-15 11:42:25,923 INFO  * Debugger PIN: 572-975-031
+2025-11-15 11:42:26,067 INFO Accessing home endpoint
+2025-11-15 11:42:26,165 INFO 127.0.0.1 - - [15/Nov/2025 11:42:26] "GET / HTTP/1.1" 200 -
+2025-11-15 11:42:27,003 INFO 127.0.0.1 - - [15/Nov/2025 11:42:27] "GET /static/images/DM_Logo_W.png HTTP/1.1" 200 -
+2025-11-15 11:42:27,010 INFO 127.0.0.1 - - [15/Nov/2025 11:42:27] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-11-15 11:42:27,040 INFO 127.0.0.1 - - [15/Nov/2025 11:42:27] "GET /static/images/slide1.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,054 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide2.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,055 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide3.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,063 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide4.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,077 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/js/nav.js HTTP/1.1" 200 -
+2025-11-15 11:42:28,101 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide6.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,104 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide5.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,185 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide8.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,190 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/slide7.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,241 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/ClearField.png HTTP/1.1" 200 -
+2025-11-15 11:42:28,263 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/fonts/LibreBaskerville-Bold.ttf HTTP/1.1" 200 -
+2025-11-15 11:42:28,271 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/underdogs.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,299 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:42:28,353 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/images/money.jpg HTTP/1.1" 200 -
+2025-11-15 11:42:28,414 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/favicon_io/site.webmanifest HTTP/1.1" 200 -
+2025-11-15 11:42:28,420 INFO 127.0.0.1 - - [15/Nov/2025 11:42:28] "GET /static/favicon_io/favicon-32x32.png HTTP/1.1" 200 -
+2025-11-15 11:42:29,249 DEBUG https://v3.football.api-sports.io:443 "GET /teams?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:42:30,849 DEBUG Loaded backend tkagg version 8.6.
+2025-11-15 11:42:39,651 DEBUG Encoding detection: ascii is most likely the one.
+2025-11-15 11:43:04,361 DEBUG Encoding detection: ascii is most likely the one.
+2025-11-15 11:43:10,186 DEBUG Encoding detection: ascii is most likely the one.
+2025-11-15 11:43:20,668 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:43:21,199 DEBUG https://v3.football.api-sports.io:443 "GET /fixtures?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:44:24,711 INFO 127.0.0.1 - - [15/Nov/2025 11:44:24] "GET /api/matches HTTP/1.1" 200 -
+2025-11-15 11:46:08,959 INFO Database connected successfully.
+2025-11-15 11:46:10,336 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.153.128:5000
+2025-11-15 11:46:10,351 INFO [33mPress CTRL+C to quit[0m
+2025-11-15 11:46:10,444 INFO  * Restarting with stat
+2025-11-15 11:46:15,702 INFO Database connected successfully.
+2025-11-15 11:46:15,742 WARNING  * Debugger is active!
+2025-11-15 11:46:15,757 INFO  * Debugger PIN: 572-975-031
+2025-11-15 11:46:15,893 INFO Accessing home endpoint
+2025-11-15 11:46:15,948 INFO 127.0.0.1 - - [15/Nov/2025 11:46:15] "GET / HTTP/1.1" 200 -
+2025-11-15 11:46:16,558 INFO 127.0.0.1 - - [15/Nov/2025 11:46:16] "[36mGET /static/images/DM_Logo_W.png HTTP/1.1[0m" 304 -
+2025-11-15 11:46:16,558 INFO 127.0.0.1 - - [15/Nov/2025 11:46:16] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-15 11:46:16,574 INFO 127.0.0.1 - - [15/Nov/2025 11:46:16] "[36mGET /static/images/slide1.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,464 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide2.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,470 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide3.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,489 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/js/nav.js HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,490 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide4.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,507 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide5.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,513 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide6.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,530 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide7.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,555 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/slide8.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,563 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/ClearField.png HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,609 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/underdogs.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,622 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/images/money.jpg HTTP/1.1[0m" 304 -
+2025-11-15 11:46:17,630 INFO 127.0.0.1 - - [15/Nov/2025 11:46:17] "[36mGET /static/fonts/LibreBaskerville-Bold.ttf HTTP/1.1[0m" 304 -
+2025-11-15 11:46:18,456 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:46:18,849 INFO 127.0.0.1 - - [15/Nov/2025 11:46:18] "[36mGET /static/favicon_io/site.webmanifest HTTP/1.1[0m" 304 -
+2025-11-15 11:46:18,862 INFO 127.0.0.1 - - [15/Nov/2025 11:46:18] "[36mGET /static/favicon_io/favicon-32x32.png HTTP/1.1[0m" 304 -
+2025-11-15 11:46:19,707 DEBUG https://v3.football.api-sports.io:443 "GET /teams?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:46:20,728 DEBUG Loaded backend tkagg version 8.6.
+2025-11-15 11:46:25,345 DEBUG Starting new HTTPS connection (1): v3.football.api-sports.io:443
+2025-11-15 11:46:25,937 DEBUG https://v3.football.api-sports.io:443 "GET /fixtures?league=39&season=2023 HTTP/1.1" 200 None
+2025-11-15 11:46:47,120 INFO 127.0.0.1 - - [15/Nov/2025 11:46:47] "GET /api/matches HTTP/1.1" 200 -
+2025-11-15 11:46:48,577 INFO 127.0.0.1 - - [15/Nov/2025 11:46:48] "GET /static/fonts/LibreBaskerville-Regular.ttf HTTP/1.1" 200 -

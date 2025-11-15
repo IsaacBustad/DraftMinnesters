@@ -72,75 +72,8 @@
   <h2>Upcoming Matches</h2>
   <p>Your one-stop solution for soccer match predictions.</p>
 
-  <div class="matches-grid">
-    <!-- Card 1 -->
-    <article class="match-card">
-      <header>
-        <div>ARS vs EVE</div>
-        <span class="badge">Upcoming</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">A</div><div>Arsenal</div></div>
-          <div>58%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">E</div><div>Everton</div></div>
-          <div>24%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>18%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-12 14:00</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
-
-    <!-- Card 2 -->
-    <article class="match-card">
-      <header>
-        <div>MIL vs NAP</div>
-        <span class="badge">Upcoming</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">M</div><div>Milan</div></div>
-          <div>49%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">N</div><div>Napoli</div></div>
-          <div>35%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>16%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-13 09:30</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
-
-    <!-- Card 3 -->
-    <article class="match-card">
-      <header>
-        <div>RMA vs CAD</div>
-        <span class="badge">Upcoming</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">R</div><div>Real Madrid</div></div>
-          <div>61%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">C</div><div>Cádiz</div></div>
-          <div>22%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>17%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-14 18:45</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
+  <div class="matches-grid" id="upcoming-matches-grid">
+    <div class="loading">Loading matches...</div>
   </div>
 </div>
 
@@ -148,50 +81,8 @@
   <h2>Most Likely to Win</h2>
   <p>Discover the teams with the highest chances of winning their upcoming matches.</p>
 
-  <div class="matches-grid">
-    <article class="match-card">
-      <header>
-        <div>FCB vs FCU</div>
-        <span class="badge win">Likely win</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">F</div><div>Bayern</div></div>
-          <div>72%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">U</div><div>Union Berlin</div></div>
-          <div>15%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>13%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-15 12:00</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
-
-    <article class="match-card">
-      <header>
-        <div>MNC vs LNR</div>
-        <span class="badge win">Likely win</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">M</div><div>Manchester Blues</div></div>
-          <div>68%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">L</div><div>London Reds</div></div>
-          <div>18%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>14%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-17 16:00</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
+  <div class="matches-grid" id="most-likely-to-win-grid">
+    <div class="loading">Loading matches...</div>
   </div>
 </div>
 
@@ -199,50 +90,8 @@
   <h2>Most Likely to Lose</h2>
   <p>Find out which teams are predicted to face tough challenges in their next games.</p>
 
-  <div class="matches-grid">
-    <article class="match-card">
-      <header>
-        <div>TRN vs NAP</div>
-        <span class="badge lose">Likely lose</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">T</div><div>Turin Bulls</div></div>
-          <div>31%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">N</div><div>Napoli Seas</div></div>
-          <div>54%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>15%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-18 19:30</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
-
-    <article class="match-card">
-      <header>
-        <div>FCP vs SCB</div>
-        <span class="badge lose">Likely lose</span>
-      </header>
-      <div class="card-body">
-        <div class="row">
-          <div class="team"><div class="crest">F</div><div>Porto</div></div>
-          <div>42%</div>
-        </div>
-        <div class="row">
-          <div class="team"><div class="crest">B</div><div>Braga</div></div>
-          <div>45%</div>
-        </div>
-        <div class="row note"><div>Draw</div><div>13%</div></div>
-      </div>
-      <div class="meta">
-        <div>2025-11-19 20:00</div>
-        <button class="star-btn" aria-label="Star match">☆</button>
-      </div>
-    </article>
+  <div class="matches-grid" id="most-likely-to-lose-grid">
+    <div class="loading">Loading matches...</div>
   </div>
 </div>
 
@@ -289,65 +138,154 @@
             });
         </script>
         <script>
-            // ---- Star system for cards ----
-            (function(){
-            const STAR_KEY = 'dm-stars';
-            const starredSet = new Set(JSON.parse(localStorage.getItem(STAR_KEY) || '[]'));
-
-            const cards = Array.from(document.querySelectorAll('.match-card'));
-            const starButtons = Array.from(document.querySelectorAll('.match-card .star-btn'));
-            const starredGrid = document.querySelector('#starred-container .matches-grid');
-
-            // Assign stable ids to buttons if missing
-            starButtons.forEach((btn, i) => {
-                if (!btn.dataset.id) btn.dataset.id = `static-${i}`;
-            });
-
-            // Reflect current state on buttons
-            function paintButtons(){
-                starButtons.forEach(btn => {
-                btn.textContent = starredSet.has(btn.dataset.id) ? '★' : '☆';
-                btn.setAttribute('aria-pressed', starredSet.has(btn.dataset.id) ? 'true' : 'false');
-                btn.title = starredSet.has(btn.dataset.id) ? 'Unstar' : 'Star';
-                });
-            }
-
-            // Render the Starred tab grid
-            function renderStarred(){
-                if (!starredGrid) return;
-                const ids = [...starredSet];
-                if (!ids.length){
-                starredGrid.innerHTML = '<div class="empty-note">No matches starred yet.</div>';
-                return;
+            // ---- Fetch and render matches ----
+            async function fetchMatches() {
+                try {
+                    const response = await fetch('/api/matches');
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('Error fetching matches:', error);
+                    return null;
                 }
-                // pick matching cards and clone them
-                const clones = ids.map(id => {
-                const btn = starButtons.find(b => b.dataset.id === id);
-                return btn ? btn.closest('.match-card').cloneNode(true) : null;
-                }).filter(Boolean);
+            }
 
-                starredGrid.innerHTML = '';
-                clones.forEach(node => {
-                // In the starred view, show filled star and disable toggling (optional)
-                const b = node.querySelector('.star-btn');
-                if (b){ b.textContent = '★'; b.disabled = true; b.style.opacity = 0.6; }
-                starredGrid.appendChild(node);
+            function createMatchCard(match, badgeClass = '', badgeText = 'Upcoming') {
+                const matchId = `match-${match.id}`;
+                const homeCode = match.home_team.code || match.home_team.name.substring(0, 3).toUpperCase();
+                const awayCode = match.away_team.code || match.away_team.name.substring(0, 3).toUpperCase();
+                
+                return `
+                    <article class="match-card" data-match-id="${match.id}">
+                        <header>
+                            <div>${homeCode} vs ${awayCode}</div>
+                            <span class="badge ${badgeClass}">${badgeText}</span>
+                        </header>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="team">
+                                    <img src="${match.home_team.logo}" alt="${match.home_team.name}" class="team-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="crest" style="display:none;">${homeCode[0]}</div>
+                                    <div>${match.home_team.name}</div>
+                                </div>
+                                <div>${match.home_team.win_percentage}%</div>
+                            </div>
+                            <div class="row">
+                                <div class="team">
+                                    <img src="${match.away_team.logo}" alt="${match.away_team.name}" class="team-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="crest" style="display:none;">${awayCode[0]}</div>
+                                    <div>${match.away_team.name}</div>
+                                </div>
+                                <div>${match.away_team.win_percentage}%</div>
+                            </div>
+                            <div class="row note">
+                                <div>Draw</div>
+                                <div>${match.draw_percentage}%</div>
+                            </div>
+                        </div>
+                        <div class="meta">
+                            <div>${match.date || 'TBD'}</div>
+                            <button class="star-btn" data-id="${matchId}" aria-label="Star match">☆</button>
+                        </div>
+                    </article>
+                `;
+            }
+
+            function renderMatches(containerId, matches, badgeClass = '', badgeText = 'Upcoming') {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                if (!matches || matches.length === 0) {
+                    container.innerHTML = '<div class="empty-note">No matches available.</div>';
+                    return;
+                }
+
+                container.innerHTML = matches.map(match => 
+                    createMatchCard(match, badgeClass, badgeText)
+                ).join('');
+
+                // Re-initialize star system after rendering
+                initializeStarSystem();
+            }
+
+            // ---- Star system for cards ----
+            function initializeStarSystem() {
+                const STAR_KEY = 'dm-stars';
+                const starredSet = new Set(JSON.parse(localStorage.getItem(STAR_KEY) || '[]'));
+                const starButtons = Array.from(document.querySelectorAll('.match-card .star-btn'));
+                const starredGrid = document.querySelector('#starred-container .matches-grid');
+
+                // Reflect current state on buttons
+                function paintButtons() {
+                    starButtons.forEach(btn => {
+                        btn.textContent = starredSet.has(btn.dataset.id) ? '★' : '☆';
+                        btn.setAttribute('aria-pressed', starredSet.has(btn.dataset.id) ? 'true' : 'false');
+                        btn.title = starredSet.has(btn.dataset.id) ? 'Unstar' : 'Star';
+                    });
+                }
+
+                // Render the Starred tab grid
+                function renderStarred() {
+                    if (!starredGrid) return;
+                    const ids = [...starredSet];
+                    if (!ids.length) {
+                        starredGrid.innerHTML = '<div class="empty-note">No matches starred yet.</div>';
+                        return;
+                    }
+                    // Find matching cards and clone them
+                    const clones = ids.map(id => {
+                        const btn = starButtons.find(b => b.dataset.id === id);
+                        return btn ? btn.closest('.match-card').cloneNode(true) : null;
+                    }).filter(Boolean);
+
+                    starredGrid.innerHTML = '';
+                    clones.forEach(node => {
+                        const b = node.querySelector('.star-btn');
+                        if (b) { 
+                            b.textContent = '★'; 
+                            b.disabled = true; 
+                            b.style.opacity = 0.6; 
+                        }
+                        starredGrid.appendChild(node);
+                    });
+                }
+
+                function save() { 
+                    localStorage.setItem(STAR_KEY, JSON.stringify([...starredSet])); 
+                }
+
+                function toggle(id) {
+                    if (starredSet.has(id)) starredSet.delete(id); 
+                    else starredSet.add(id);
+                    save(); 
+                    paintButtons(); 
+                    renderStarred();
+                }
+
+                // Hook clicks
+                starButtons.forEach(btn => {
+                    btn.removeEventListener('click', btn._clickHandler);
+                    btn._clickHandler = () => toggle(btn.dataset.id);
+                    btn.addEventListener('click', btn._clickHandler);
                 });
+
+                // Initial paint
+                paintButtons();
+                renderStarred();
             }
 
-            function save(){ localStorage.setItem(STAR_KEY, JSON.stringify([...starredSet])); }
-
-            function toggle(id){
-                if (starredSet.has(id)) starredSet.delete(id); else starredSet.add(id);
-                save(); paintButtons(); renderStarred();
-            }
-
-            // Hook clicks
-            starButtons.forEach(btn => btn.addEventListener('click', () => toggle(btn.dataset.id)));
-
-            // Initial paint
-            paintButtons();
-            renderStarred();
+            // Load matches on page load
+            (async function() {
+                const data = await fetchMatches();
+                if (data) {
+                    renderMatches('upcoming-matches-grid', data.upcoming, '', 'Upcoming');
+                    renderMatches('most-likely-to-win-grid', data.most_likely_to_win, 'win', 'Likely win');
+                    renderMatches('most-likely-to-lose-grid', data.most_likely_to_lose, 'lose', 'Likely lose');
+                } else {
+                    document.getElementById('upcoming-matches-grid').innerHTML = '<div class="empty-note">Failed to load matches. Please try again later.</div>';
+                    document.getElementById('most-likely-to-win-grid').innerHTML = '<div class="empty-note">Failed to load matches. Please try again later.</div>';
+                    document.getElementById('most-likely-to-lose-grid').innerHTML = '<div class="empty-note">Failed to load matches. Please try again later.</div>';
+                }
             })();
         </script>
 
