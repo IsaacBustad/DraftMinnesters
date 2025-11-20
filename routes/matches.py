@@ -1,0 +1,425 @@
+from flask import Blueprint, jsonify
+import requests
+import random
+from datetime import datetime
+import logging
+import sqlite3
+import json
+import os
+
+matches_bp = Blueprint('matches', __name__)
+
+API_BASE_URL = "https://v3.football.api-sports.io"
+API_KEY = "13298635a1431cb71e482ddd48f70ce8"
+HEADERS = {
+    "x-rapidapi-key": API_KEY,
+    "x-rapidapi-host": "v3.football.api-sports.io"
+}
+
+DB_FILE = 'draft_ministers.db'
+
+def fetch_teams() -> dict:
+    """Load teams from local JSON file for MVP demo."""
+    try:
+        json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'teams_response.json')
+        with open(json_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        logging.error(f"Error loading teams from JSON: {e}")
+        return None
+
+def fetch_fixtures() -> dict:
+    """Load fixtures from local JSON file for MVP demo."""
+    try:
+        json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'fixtures_response.json')
+        with open(json_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        logging.error(f"Error loading fixtures from JSON: {e}")
+        return None
+
+def generate_win_percentages():
+    """Generate random win percentages for home, away, and draw."""
+    home_win = random.uniform(0.20, 0.75)
+    away_win = random.uniform(0.15, 0.70)
+    draw = random.uniform(0.10, 0.25)
+    
+    # Normalize to sum to 100%
+    total = home_win + away_win + draw
+    home_win = round((home_win / total) * 100, 1)
+    away_win = round((away_win / total) * 100, 1)
+    draw = round((draw / total) * 100, 1)
+    
+    return home_win, away_win, draw
+
+def clear_database():
+    """Clear all teams and fixtures from the database."""
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM soccer_fixtures")
+        cursor.execute("DELETE FROM soccer_teams")
+        conn.commit()
+        cursor.close()
+        conn.close()
+        logging.info("Database cleared successfully")
+        return True
+    except Exception as e:
+        logging.error(f"Error clearing database: {e}")
+        return False
+
+def save_teams_to_db(teams_data: dict) -> bool:
+    """Save teams data to the database."""
+    if not teams_data or "response" not in teams_data:
+        return False
+    
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        
+        for item in teams_data.get("response", []):
+            team = item.get("team", {})
+            venue = item.get("venue", {})
+            
+            cursor.execute("""
+                INSERT OR REPLACE INTO soccer_teams 
+                (id, name, code, country, founded, national, logo, venue_id, venue_name, 
+                 venue_address, venue_city, venue_capacity, venue_surface, venue_image, league)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                team.get("id"),
+                team.get("name", ""),
+                team.get("code", ""),
+                team.get("country", ""),
+                team.get("founded"),
+                1 if team.get("national", False) else 0,
+                team.get("logo", ""),
+                venue.get("id"),
+                venue.get("name", ""),
+                venue.get("address", ""),
+                venue.get("city", ""),
+                venue.get("capacity"),
+                venue.get("surface", ""),
+                venue.get("image", ""),
+                "Premier League"
+            ))
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        logging.info("Teams saved to database successfully")
+        return True
+    except Exception as e:
+        logging.error(f"Error saving teams to database: {e}")
+        return False
+
+def save_fixtures_to_db(fixtures_data: dict) -> bool:
+    """Save fixtures data to the database."""
+    if not fixtures_data or "response" not in fixtures_data:
+        return False
+    
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        
+        for item in fixtures_data.get("response", []):
+            fixture = item.get("fixture", {})
+            teams = item.get("teams", {})
+            league = item.get("league", {})
+            goals = item.get("goals", {})
+            venue = fixture.get("venue", {})
+            status = fixture.get("status", {})
+            
+            cursor.execute("""
+                INSERT OR REPLACE INTO soccer_fixtures 
+                (fixture_id, date, timestamp, status_long, status_short, home_team_id, away_team_id,
+                 league_id, league_name, season, round, venue_id, venue_name, venue_city, referee,
+                 home_goals, away_goals, home_winner, away_winner, raw_data)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                fixture.get("id"),
+                fixture.get("date", ""),
+                fixture.get("timestamp"),
+                status.get("long", ""),
+                status.get("short", ""),
+                teams.get("home", {}).get("id"),
+                teams.get("away", {}).get("id"),
+                league.get("id"),
+                league.get("name", ""),
+                league.get("season"),
+                league.get("round", ""),
+                venue.get("id"),
+                venue.get("name", ""),
+                venue.get("city", ""),
+                fixture.get("referee", ""),
+                goals.get("home"),
+                goals.get("away"),
+                1 if teams.get("home", {}).get("winner") else 0,
+                1 if teams.get("away", {}).get("winner") else 0,
+                json.dumps(item)
+            ))
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        logging.info("Fixtures saved to database successfully")
+        return True
+    except Exception as e:
+        logging.error(f"Error saving fixtures to database: {e}")
+        return False
+
+def load_teams_from_db() -> dict:
+    """Load teams from the database and return in API format."""
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT * FROM soccer_teams")
+        rows = cursor.fetchall()
+        
+        if not rows:
+            cursor.close()
+            conn.close()
+            return None
+        
+        response = []
+        for row in rows:
+            response.append({
+                "team": {
+                    "id": row["id"],
+                    "name": row["name"],
+                    "code": row["code"],
+                    "country": row["country"],
+                    "founded": row["founded"],
+                    "national": bool(row["national"]),
+                    "logo": row["logo"]
+                },
+                "venue": {
+                    "id": row["venue_id"],
+                    "name": row["venue_name"],
+                    "address": row["venue_address"],
+                    "city": row["venue_city"],
+                    "capacity": row["venue_capacity"],
+                    "surface": row["venue_surface"],
+                    "image": row["venue_image"]
+                }
+            })
+        
+        cursor.close()
+        conn.close()
+        logging.info(f"Loaded {len(response)} teams from database")
+        return {"response": response}
+    except Exception as e:
+        logging.error(f"Error loading teams from database: {e}")
+        return None
+
+def load_fixtures_from_db() -> dict:
+    """Load fixtures from the database and return in API format."""
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT * FROM soccer_fixtures")
+        rows = cursor.fetchall()
+        
+        if not rows:
+            cursor.close()
+            conn.close()
+            return None
+        
+        response = []
+        for row in rows:
+            raw_data = json.loads(row["raw_data"]) if row["raw_data"] else {}
+            response.append(raw_data if raw_data else {
+                "fixture": {
+                    "id": row["fixture_id"],
+                    "date": row["date"],
+                    "timestamp": row["timestamp"],
+                    "referee": row["referee"],
+                    "status": {
+                        "long": row["status_long"],
+                        "short": row["status_short"]
+                    },
+                    "venue": {
+                        "id": row["venue_id"],
+                        "name": row["venue_name"],
+                        "city": row["venue_city"]
+                    }
+                },
+                "teams": {
+                    "home": {"id": row["home_team_id"]},
+                    "away": {"id": row["away_team_id"]}
+                },
+                "league": {
+                    "id": row["league_id"],
+                    "name": row["league_name"],
+                    "season": row["season"],
+                    "round": row["round"]
+                },
+                "goals": {
+                    "home": row["home_goals"],
+                    "away": row["away_goals"]
+                }
+            })
+        
+        cursor.close()
+        conn.close()
+        logging.info(f"Loaded {len(response)} fixtures from database")
+        return {"response": response}
+    except Exception as e:
+        logging.error(f"Error loading fixtures from database: {e}")
+        return None
+
+def format_match_data(fixture: dict, teams_map: dict) -> dict:
+    """Format fixture data for frontend display."""
+    fixture_data = fixture.get("fixture", {})
+    teams_data = fixture.get("teams", {})
+    home_team = teams_data.get("home", {})
+    away_team = teams_data.get("away", {})
+    
+    home_win, away_win, draw = generate_win_percentages()
+    
+    # Get team logos from teams_map
+    home_team_id = home_team.get("id")
+    away_team_id = away_team.get("id")
+    home_logo = teams_map.get(home_team_id, {}).get("logo", "")
+    away_logo = teams_map.get(away_team_id, {}).get("logo", "")
+    
+    # Format date
+    date_str = fixture_data.get("date", "")
+    match_date = None
+    if date_str:
+        try:
+            dt = datetime.fromisoformat(date_str.replace("+00:00", ""))
+            match_date = dt.strftime("%Y-%m-%d %H:%M")
+        except:
+            match_date = date_str
+    
+    status = fixture_data.get("status", {})
+    status_long = status.get("long", "")
+    
+    # For demo purposes, treat all 2023 fixtures as upcoming matches
+    # (since we're using free API with 2023 cutoff)
+    is_upcoming = True
+    
+    return {
+        "id": fixture_data.get("id"),
+        "home_team": {
+            "id": home_team_id,
+            "name": home_team.get("name", ""),
+            "code": home_team.get("code", ""),
+            "logo": home_logo,
+            "win_percentage": home_win
+        },
+        "away_team": {
+            "id": away_team_id,
+            "name": away_team.get("name", ""),
+            "code": away_team.get("code", ""),
+            "logo": away_logo,
+            "win_percentage": away_win
+        },
+        "draw_percentage": draw,
+        "date": match_date,
+        "status": status_long,
+        "is_upcoming": is_upcoming
+    }
+
+def get_match_data_internal():
+    """Internal helper to get match data."""
+    # Try to load from database first
+    teams_data = load_teams_from_db()
+    fixtures_data = load_fixtures_from_db()
+    
+    # If database is empty, fetch from API and save
+    if not teams_data or not fixtures_data:
+        logging.info("Database empty, fetching from API")
+        teams_data = fetch_teams()
+        fixtures_data = fetch_fixtures()
+        
+        if not teams_data or not fixtures_data:
+            return {"error": "Failed to fetch data from API"}
+        
+        # Save to database for next time
+        save_teams_to_db(teams_data)
+        save_fixtures_to_db(fixtures_data)
+    
+    # Create teams map for quick lookup
+    teams_map = {}
+    for team_item in teams_data.get("response", []):
+        team = team_item.get("team", {})
+        teams_map[team.get("id")] = {
+            "name": team.get("name", ""),
+            "code": team.get("code", ""),
+            "logo": team.get("logo", "")
+        }
+    
+    # Process fixtures
+    fixtures = fixtures_data.get("response", [])
+    matches = []
+    
+    for fixture in fixtures:
+        match_data = format_match_data(fixture, teams_map)
+        matches.append(match_data)
+    
+    # All 2023 fixtures are treated as upcoming for demo
+    upcoming_matches = matches
+    
+    # Sort by date
+    upcoming_matches.sort(key=lambda x: x.get("date", ""))
+    
+    # Get most likely to win (highest win percentage)
+    most_likely_to_win = sorted(
+        upcoming_matches,
+        key=lambda x: max(x["home_team"]["win_percentage"], x["away_team"]["win_percentage"]),
+        reverse=True
+    )[:10]
+    
+    # Get most likely to lose (lowest win percentage)
+    most_likely_to_lose = sorted(
+        upcoming_matches,
+        key=lambda x: min(x["home_team"]["win_percentage"], x["away_team"]["win_percentage"])
+    )[:10]
+    
+    return {
+        "upcoming": upcoming_matches,  # Show all 2023 fixtures as upcoming
+        "most_likely_to_win": most_likely_to_win,
+        "most_likely_to_lose": most_likely_to_lose
+    }
+
+@matches_bp.route('/api/matches', methods=['GET'])
+def get_matches():
+    """Fetch and return match data with predictions. Checks database first."""
+    data = get_match_data_internal()
+    if "error" in data:
+        return jsonify(data), 500
+    return jsonify(data)
+
+@matches_bp.route('/api/refresh-data', methods=['POST'])
+def refresh_data():
+    """Clear database and fetch latest data from API."""
+    try:
+        # Clear database
+        if not clear_database():
+            return jsonify({"error": "Failed to clear database"}), 500
+        
+        # Fetch fresh data from API
+        teams_data = fetch_teams()
+        fixtures_data = fetch_fixtures()
+        
+        if not teams_data or not fixtures_data:
+            return jsonify({"error": "Failed to fetch data from API"}), 500
+        
+        # Save to database
+        if not save_teams_to_db(teams_data) or not save_fixtures_to_db(fixtures_data):
+            return jsonify({"error": "Failed to save data to database"}), 500
+        
+        return jsonify({
+            "message": "Data refreshed successfully",
+            "teams_count": len(teams_data.get("response", [])),
+            "fixtures_count": len(fixtures_data.get("response", []))
+        })
+    except Exception as e:
+        logging.error(f"Error refreshing data: {e}")
+        return jsonify({"error": str(e)}), 500

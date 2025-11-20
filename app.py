@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template_string
+from flask import Flask, jsonify, request, render_template
 import sqlite3
 from kafka import KafkaProducer
 import subprocess
@@ -7,10 +7,15 @@ import requests
 import logging
 import os
 from routes.predict import predict_bp
-import secret_tunnel as secret
+from routes.matches import matches_bp, get_match_data_internal
+from routes.user import user_bp
+import secret_tunnel as secret 
+import random
 
 app = Flask(__name__)
 app.register_blueprint(predict_bp)
+app.register_blueprint(matches_bp)
+app.register_blueprint(user_bp)
 
 # Create logs directory if it doesn't exist
 log_dir = 'logs'
@@ -30,7 +35,7 @@ def init_db():
         cursor = conn.cursor()
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS soccer_teams (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY,
                 name TEXT UNIQUE,
                 code TEXT,
                 country TEXT,
@@ -57,6 +62,30 @@ def init_db():
                 FOREIGN KEY (team_id) REFERENCES soccer_teams(id)
             )
         """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS soccer_fixtures (
+                fixture_id INTEGER PRIMARY KEY,
+                date TEXT,
+                timestamp INTEGER,
+                status_long TEXT,
+                status_short TEXT,
+                home_team_id INTEGER,
+                away_team_id INTEGER,
+                league_id INTEGER,
+                league_name TEXT,
+                season INTEGER,
+                round TEXT,
+                venue_id INTEGER,
+                venue_name TEXT,
+                venue_city TEXT,
+                referee TEXT,
+                home_goals INTEGER,
+                away_goals INTEGER,
+                home_winner INTEGER,
+                away_winner INTEGER,
+                raw_data TEXT
+            )
+        """)
         conn.commit()
         cursor.close()
         conn.close()
@@ -67,53 +96,35 @@ def init_db():
 @app.route('/')
 def home():
     logging.info("Accessing home endpoint")
-    html = """
-    <html>
-    <head>
-        <title>Draft Ministers App - Soccer Prediction</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-        <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
-    </head>
-    <body>
-        <header>
-            <h1>Welcome to Draft Ministers App - Soccer Prediction!</h1>
-            <p>Follow us on <a href="#" style="color: #1DA1F2;">Twitter</a> and <a href="#" style="color: #1DA1F2;">Facebook</a></p>
-        </header>
-        <main>
-            <img src="{{ url_for('static', filename='images/soccer_banner.jpg') }}" alt="Most Likely to Win" style="width:auto; height:auto; ">
-            <div class="banner-container">Underdogs</div>
-            <div class="banner-container">Upcoming Matches</div>
-            <div class="banner-container">Most Likely to Win</div>
-            <nav class="navigation">
-                <button role="tab" class="nav-links active" onclick="toggleNav(event, 'upcoming-matches-container')" aria-selected="true">Upcoming Matches</button>
-                <button role="tab" class="nav-links" onclick="toggleNav(event, 'most-likely-to-win-container')">Most Likely to Win</button>
-                <button role="tab" class="nav-links" onclick="toggleNav(event, 'most-likely-to-lose-container')">Most Likely to Lose</button>
-                <button role="tab" class="nav-links" onclick="toggleNav(event, 'starred-container')">Starred</button>
-            </nav>
-            <div id="upcoming-matches-container" class="nav-content" style="display: block;" aria-labelledby="tab-upcoming">
-                <h2>Welcome to the Draft Ministers App</h2>
-                <p>Your one-stop solution for soccer match predictions.</p>
-            </div>
-            <div id="most-likely-to-win-container" class="nav-content" aria-labelledby="tab-most-likely">
-                <h2>Most Likely to Win</h2>
-                <p>Discover the teams with the highest chances of winning their upcoming matches.</p>
-            </div>
-            <div id="most-likely-to-lose-container" class="nav-content" aria-labelledby="tab-least-likely">
-                <h2>Most Likely to Lose</h2>
-                <p>Find out which teams are predicted to face tough challenges in their next games.</p>
-            </div>
-            <div id="starred-container" class="nav-content" aria-labelledby="tab-starred">
-                <h2>Starred Players</h2>
-                <p>Highlighting the standout players to watch in the upcoming matches.</p>
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2025 Draft Ministers</p>
-        </footer>
-    </body>
-    </html>
-    """
-    return render_template_string(html)
+    
+    data = get_match_data_internal()
+    upcoming = []
+    winner_team = None
+    underdog_team = None
+
+    if "error" not in data:
+        upcoming = data.get("upcoming", [])
+        
+        # Winner: Team with highest win % (already sorted in most_likely_to_win)
+        winners_list = data.get("most_likely_to_win", [])
+        winner_match = winners_list[0] if winners_list else None
+        
+        if winner_match:
+            home = winner_match["home_team"]
+            away = winner_match["away_team"]
+            winner_team = home if home["win_percentage"] >= away["win_percentage"] else away
+            winner_team["match_vs"] = away["name"] if winner_team == home else home["name"]
+            winner_team["match_date"] = winner_match["date"]
+        
+        # Underdog: Select a team at random
+        if upcoming:
+            random_match = random.choice(upcoming)
+            teams = [random_match["home_team"], random_match["away_team"]]
+            underdog_team = random.choice(teams)
+            underdog_team["match_vs"] = random_match["away_team"]["name"] if underdog_team == random_match["home_team"] else random_match["home_team"]["name"]
+            underdog_team["match_date"] = random_match["date"]
+
+    return render_template('index.html', matches=upcoming, winner=winner_team, underdog=underdog_team)
 
 def kafka():
     league = request.args.get('league', '39')
