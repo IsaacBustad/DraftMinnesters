@@ -14,7 +14,7 @@ def profile():
     
     # Portfolio data
     portfolio = {
-        "wallet_balance": 35934556.00,
+        "wallet_balance": 15934556.00,
         "total_profit": 1568300.00,
         "win_rate": 82,
         "placed_bets": [
