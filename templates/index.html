@@ -371,7 +371,7 @@
                 }
 
                 // Re-initialize star system after rendering
-                initializeStarSystem();
+                bindStarButtons();
             }
 
             function loadMoreMatches(containerId) {
@@ -402,6 +402,14 @@
                 Object.keys(matchesData).forEach(containerId => {
                     const data = matchesData[containerId];
                     if (!data || !data.all.length) return;
+
+                    // Skip filtering for most likely to win/lose and starred tabs
+                    if (containerId !== 'upcoming-matches-grid') {
+                        data.filtered = data.all;
+                        data.displayed = Math.min(INITIAL_CARDS, data.filtered.length);
+                        renderMatchesPage(containerId);
+                        return;
+                    }
 
                     data.filtered = data.all.filter(match => {
                         const homeName = match.home_team.name.toLowerCase();
@@ -507,12 +515,6 @@
                 });
             }
 
-            // Hook into renderMatchesPage to ensure buttons are bound after render
-            const originalRenderMatchesPage = renderMatchesPage;
-            renderMatchesPage = function(containerId) {
-                originalRenderMatchesPage(containerId);
-                bindStarButtons();
-            };
 
             // Load matches on page load
             (async function() {
