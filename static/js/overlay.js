@@ -10,6 +10,21 @@ function off() {
   document.getElementById("overlay").style.display = "none";
 }
 
+function tweenWinner(){
+  let t1winp = parseFloat(document.getElementById('team1winchanse').innerText);
+  let t2winp = parseFloat(document.getElementById('team2winchanse').innerText);
+
+  if(t1winp > t2winp){
+    let winamt = t1winp - t2winp;
+
+  }
+
+  if(t2winp > t1winp){
+    let winamt = t2winp - t1winp;
+    
+  }
+}
+
 function OnWithData(matchNum) {
   
     fetch('/teamstats', {
@@ -30,6 +45,8 @@ function OnWithData(matchNum) {
 
         document.getElementById('team1winchanse').innerText = data.team2winchanse;
         document.getElementById('team2winchanse').innerText = data.team2winchanse;
+
+
     });
   on();
 }
