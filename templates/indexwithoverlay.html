@@ -7,12 +7,16 @@
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         />
+        <link
+            rel = "overlaystyles"
+        />
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon_io/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}">
         <link rel="manifest" href="{{ url_for('static', filename='favicon_io/site.webmanifest') }}">
         
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="overlaystyles" href="{{ url_for('static', filename='css/overlaystyles.css') }}">
     </head>
     <body>
         <header>
@@ -102,6 +106,37 @@
     <div class="empty-note">No matches starred yet.</div>
   </div>
 </div>
+
+            <div id="overlay" onclick="off()">
+                <div id = "summary">
+                    <div id = "left">
+                        <h2>Team1Stats</h2>
+                        <p>Team info and stats as a bunch of text here</p>
+
+                    </div>
+
+                    <div id = "center">
+                        <h2>V.S</h2>
+                        <div id = "winloosescale">
+                            <div id = "predictball">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id = "right">
+                        <div>
+                            <h2>Team2Stats</h2>
+                            <p>Team info and stats as a bunch of text here</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                
+            </div>
 
         </main>
         <footer>
