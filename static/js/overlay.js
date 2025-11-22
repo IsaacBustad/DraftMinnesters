@@ -97,9 +97,8 @@ function updateTeamSection(prefix, team, winPercentage) {
 
 function updateProbabilityScale(homeWin, awayWin, draw) {
     const scale = document.getElementById("probability-scale");
-    const ball = document.getElementById("predict-ball");
     
-    if (!scale || !ball) return;
+    if (!scale) return;
 
     // Calculate position (0 = home wins, 100 = away wins, 50 = draw)
     // Weighted average: home at 0, draw at 50, away at 100
@@ -108,14 +107,13 @@ function updateProbabilityScale(homeWin, awayWin, draw) {
 
     const position = (awayWin * 100 + draw * 50) / total;
     
-    // Update ball position
-    ball.style.left = `${position}%`;
-    
-    // Update bar width to show combined probability
+    // Update bar width and position to show probability
     const bar = document.getElementById("probability-bar");
     if (bar) {
         const barWidth = Math.max(homeWin, awayWin, draw);
         bar.style.width = `${barWidth}%`;
+        // Position the bar to show which team is favored
+        bar.style.left = `${Math.min(position, 100 - barWidth)}%`;
     }
 }
 

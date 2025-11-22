@@ -514,10 +514,14 @@ def get_match_data_internal():
         key=lambda x: x["home_team"]["win_percentage"]
     )[:10]
     
+    # Sort past matches by date (most recent first)
+    past_matches.sort(key=lambda x: x.get("date", ""), reverse=True)
+    
     return {
         "upcoming": upcoming_matches,  # Show all 2023 fixtures as upcoming
         "most_likely_to_win": most_likely_to_win,
-        "most_likely_to_lose": most_likely_to_lose
+        "most_likely_to_lose": most_likely_to_lose,
+        "past": past_matches
     }
 
 @matches_bp.route('/api/matches', methods=['GET'])

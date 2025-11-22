@@ -86,6 +86,10 @@
     Upcoming Matches
   </button>
   <button role="tab" class="nav-links"
+          onclick="toggleNav(event, 'past-matches-container')">
+    Past Matches
+  </button>
+  <button role="tab" class="nav-links"
           onclick="toggleNav(event, 'most-likely-to-win-container')">
     Most Likely to Win
   </button>
@@ -135,6 +139,15 @@
   </div>
 </div>
 
+<div id="past-matches-container" class="nav-content" aria-labelledby="tab-past">
+  <h2>Past Matches</h2>
+  <p>View completed matches and their results.</p>
+
+  <div class="matches-grid" id="past-matches-grid">
+    <div class="loading">Loading matches...</div>
+  </div>
+</div>
+
 <div id="most-likely-to-win-container" class="nav-content" aria-labelledby="tab-most-likely">
   <h2>Most Likely to Win</h2>
   <p>Discover the teams with the highest chances of winning their upcoming matches.</p>
@@ -180,7 +193,6 @@
                                 <div>VS</div>
                                 <div class="probability-scale">
                                     <div id="probability-bar" class="probability-bar"></div>
-                                    <div id="predict-ball" class="predict-ball"></div>
                                 </div>
                                 <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
                                     <span id="detail-draw">0%</span> Draw
@@ -284,6 +296,7 @@
                     if (data) {
                         const allLists = [
                             ...(data.upcoming || []), 
+                            ...(data.past || []),
                             ...(data.most_likely_to_win || []), 
                             ...(data.most_likely_to_lose || [])
                         ];
@@ -582,13 +595,14 @@
                 const data = await fetchMatches();
                 if (data) {
                     renderMatches('upcoming-matches-grid', data.upcoming, '', 'Upcoming');
+                    renderMatches('past-matches-grid', data.past || [], 'past', 'Past');
                     renderMatches('most-likely-to-win-grid', data.most_likely_to_win, 'win', 'Likely win');
                     renderMatches('most-likely-to-lose-grid', data.most_likely_to_lose, 'lose', 'Likely lose');
                     
                     // Initial load of starred matches
                     updateStarredGrid();
                 } else {
-                    ['upcoming-matches-grid', 'most-likely-to-win-grid', 'most-likely-to-lose-grid', 'starred-grid'].forEach(id => {
+                    ['upcoming-matches-grid', 'past-matches-grid', 'most-likely-to-win-grid', 'most-likely-to-lose-grid', 'starred-grid'].forEach(id => {
                          const el = document.getElementById(id);
                          if(el) el.innerHTML = '<div class="empty-note">Failed to load matches. Please try again later.</div>';
                     });
@@ -622,6 +636,7 @@
                         const matchesDataRes = await fetchMatches();
                         if (matchesDataRes) {
                             renderMatches('upcoming-matches-grid', matchesDataRes.upcoming, '', 'Upcoming');
+                            renderMatches('past-matches-grid', matchesDataRes.past || [], 'past', 'Past');
                             renderMatches('most-likely-to-win-grid', matchesDataRes.most_likely_to_win, 'win', 'Likely win');
                             renderMatches('most-likely-to-lose-grid', matchesDataRes.most_likely_to_lose, 'lose', 'Likely lose');
                             updateStarredGrid();
