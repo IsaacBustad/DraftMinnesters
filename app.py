@@ -2,16 +2,18 @@ from flask import Flask, jsonify, request, render_template
 import sqlite3
 import subprocess
 import json
+import requests
 import logging
 import os
-from routes.predict import predict_bp
 from routes.matches import matches_bp, get_match_data_internal
-import secret_tunnel as secret 
+from routes.user import user_bp
+from routes.admin import admin_bp
 import random
 
 app = Flask(__name__)
-app.register_blueprint(predict_bp)
 app.register_blueprint(matches_bp)
+app.register_blueprint(user_bp)
+app.register_blueprint(admin_bp)
 
 # Create logs directory if it doesn't exist
 log_dir = 'logs'
@@ -45,9 +47,16 @@ def init_db():
                 venue_capacity INTEGER,
                 venue_surface TEXT,
                 venue_image TEXT,
-                league TEXT
+                league TEXT,
+                dmr REAL
             )
         """)
+        # Add dmr column to existing tables if it doesn't exist
+        try:
+            cursor.execute("ALTER TABLE soccer_teams ADD COLUMN dmr REAL")
+        except sqlite3.OperationalError:
+            # Column already exists, ignore
+            pass
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS soccer_players (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,8 +88,37 @@ def init_db():
                 away_goals INTEGER,
                 home_winner INTEGER,
                 away_winner INTEGER,
-                raw_data TEXT
+                raw_data TEXT,
+                home_win_percentage REAL,
+                away_win_percentage REAL,
+                draw_percentage REAL
             )
+        """)
+        # Add win percentage columns to existing tables if they don't exist
+        for col in ['home_win_percentage', 'away_win_percentage', 'draw_percentage']:
+            try:
+                cursor.execute(f"ALTER TABLE soccer_fixtures ADD COLUMN {col} REAL")
+            except sqlite3.OperationalError:
+                # Column already exists, ignore
+                pass
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS ml_run_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_time TEXT NOT NULL,
+                status TEXT,
+                teams_updated INTEGER DEFAULT 0
+            )
+        """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS app_config (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            )
+        """)
+        # Set default cutoff date to 2023-12-31 if not exists
+        cursor.execute("""
+            INSERT OR IGNORE INTO app_config (key, value) 
+            VALUES ('upcoming_match_cutoff_date', '2023-12-31')
         """)
         conn.commit()
         cursor.close()
@@ -124,5 +162,4 @@ def home():
 
 if __name__ == '__main__':
     init_db()
-    app.run(host='0.0.0.0', port=5000, debug=True)
-
+    app.run(host='0.0.0.0', port=5000)
