@@ -366,6 +366,12 @@ nav.navigation {
   overflow:hidden;
   box-shadow:0 10px 24px rgba(0,0,0,.10);
   font-family:"Libre Baskerville", serif;
+  cursor:pointer;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.match-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(0,0,0,.15);
 }
 .match-card header{
   display:flex;justify-content:space-between;align-items:center;
